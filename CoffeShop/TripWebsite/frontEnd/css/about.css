@@ -1,0 +1,126 @@
+.about-img {
+  margin-top: 8em;
+  height: 20em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: -2;
+}
+
+.about-img::before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: -1;
+}
+
+.about-hero-text h1 {
+  text-align: center;
+  font-size: 6em;
+  color: #fffcf7;
+  line-height: 3.5em;
+  font-weight: 500;
+}
+
+
+.hero-abt-text {
+  text-align: center;
+  position: relative;
+  padding-top: 5em;
+}
+
+body {
+  background-color: #f7efef;
+}
+
+.title1 {
+  font-weight: 200;
+}
+
+.text1 {
+  padding: 1em 3em;
+  font-weight: 100;
+  font-size: larger;
+}
+
+
+.title2 {
+  padding-top: 1em;
+  font-weight: 300;
+  font-size: larger;
+}
+
+.text2 {
+  font-weight: 100;
+  font-size: 1em;
+}
+
+.custom-div {
+  float: left;
+  width: 33.33%;
+  padding: 0em 1em;
+}
+
+.hero-abt {
+  padding-bottom: 16em;
+}
+
+
+@media only screen and (max-width:580px) {
+  .title1 {
+    font-size: 1.5em;
+  }
+
+  .text2 {
+    font-size: smaller;
+  }
+
+  .text1 {
+    font-size: 1em;
+  }
+
+  .hero-abt-text {
+    margin-bottom: 4em;
+    padding-bottom: 2em;
+  }
+
+}
+
+@media only screen and (max-width:645px) {
+  .about-img {
+    margin-top: 7em;
+  }
+}
+
+
+@media only screen and (max-width:601px) {
+  .about-img {
+    margin-top: 0em;
+  }
+}
+
+@media only screen and (max-width:450px) {
+  .menu-hero-text h1 {
+    font-size: 5em;
+    line-height: 4em;
+  }
+}
+
+
+@media only screen and (max-width:400px) {
+  .title2 {
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (max-width:350px) {
+  .footer {
+    margin-top: 2em;
+  }
+}

@@ -1,0 +1,333 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Merienda&display=swap');
+/*font family*/
+
+
+
+body {
+    background-color: #f0f1ec;
+}
+
+.all-cont {
+    padding-top: 18em;
+}
+
+.key-cont {
+    float: left;
+    width: 40%;
+}
+
+.cont-img {
+    height: auto;
+    object-fit: cover;
+    border-radius: 0em 0em 10em 0em;
+}
+
+.all-forms {
+    float: left;
+    width: 60%;
+    padding-left: 6%;
+    /* margin-right: auto; */
+}
+
+.form-cont {
+    color: #020202;
+    float: left;
+    width: 45%;
+    padding: 1em;
+    border-radius: 0.3em;
+    border: none;
+    margin: 1em;
+}
+
+#textarea {
+    float: left;
+    width: 93%;
+    height: 8em;
+    font-size: 1.1em;
+    color: #020202;
+
+}
+
+#submit-butt {
+    background-color: #020202;
+    color: #f0f1ec;
+    margin-left: 1em;
+    border-radius: 2em;
+    border-style: none;
+    width: 7em;
+    height: 3em;
+    transition: 0.3s;
+}
+
+#submit-butt:hover {
+    color: #E8C582;
+    background-color: #fff;
+}
+
+.all-forms h1 {
+    padding-top: 0.1em;
+    font-family: 'Comfortaa', sans-serif;
+    margin-bottom: 0.5em;
+    color: #020202;
+    font-size: 3em;
+}
+
+.submit-cont {
+    width: 20%;
+    padding: 1em;
+    margin: 0.5em;
+    background-color: #020202;
+    color: #fffcf7;
+    font-family: "Poppins", sans-serif;
+    border-radius: 10em;
+}
+
+.submit-cont a:hover {
+    background-color: #282828;
+}
+
+.fa-mug-hot {
+    font-size: 3em;
+    padding-right: 0.5em;
+
+}
+
+.fa-solid {
+    float: left;
+}
+
+#all-last {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    clear: both;
+    margin-bottom: 10em;
+    padding-top: 6em;
+}
+
+.contact-last {
+    width: 30%;
+    height: 5em;
+    background-color: #E8C582;
+    float: left;
+    margin-left: 2em;
+    margin-bottom: 2em;
+    border-radius: 10em;
+}
+
+.contact-last h2 {
+    padding-top: 0.4em;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.contact-last i {
+    font-size: 5em;
+}
+
+.contact-last a {
+    color: #020202;
+}
+
+.contact-last a:hover {
+    transition: 0.3s;
+    color: #fff;
+}
+
+.row {
+    float: left;
+}
+
+
+/* responsive content  */
+@media only screen and (max-width:1067px) {
+    .all-forms {
+        float: none;
+        margin-left: 40%;
+    }
+
+    .key-cont {
+        height: 30em;
+    }
+
+    .cont-img {
+        width: 100%;
+        height: 90%;
+    }
+
+    .all-cont {
+        padding-top: 10em;
+    }
+
+    .contact-last {
+        width: 27%;
+        height: 4em;
+        font-size: 0.8em;
+        margin-left: 4em;
+    }
+
+    .contact-last i {
+        font-size: 4em;
+    }
+
+    .contact-last h2 {
+        padding-top: 0.1em;
+        font-size: 1.2em;
+    }
+
+    .all-last {
+        padding-top: 4em;
+        margin-left: 7%;
+    }
+
+    .all-forms h1 {
+        font-size: 2.5em;
+    }
+
+    .fa-mug-hot {
+        font-size: 2.5em;
+        padding-right: 0.3em;
+
+    }
+}
+
+@media only screen and (max-width:987px) {
+    .form-cont {
+        width: 100%;
+    }
+
+    #textarea {
+        width: 100%;
+    }
+
+    #all-last {
+        margin-left: 4%;
+    }
+
+    .key-cont {
+        width: 41%;
+    }
+
+    .all-forms h1 {
+        font-size: 2em;
+    }
+
+    .fa-mug-hot {
+        font-size: 2em;
+        padding-right: 0.3em;
+    }
+
+}
+
+
+@media only screen and (max-width:900px) {
+    .key-cont {
+        width: 100%;
+    }
+
+    .all-cont {
+        padding-top: 02em;
+    }
+
+    .all-forms {
+        width: 90%;
+        margin-left: 2%;
+    }
+
+    .contact-last {
+        width: 25%;
+        height: 4em;
+        font-size: 0.7em;
+        margin-left: 3.5em;
+    }
+
+    #all-last {
+        margin-bottom: 8em;
+        margin-left: 8%;
+    }
+
+}
+
+@media only screen and (max-width:790px) {
+
+    .contact-last h2 {
+        font-size: 1em;
+        padding-top: 0.8em;
+    }
+
+    .contact-last {
+        height: 5em;
+        width: 25%;
+    }
+
+    .contact-last i {
+        font-size: 4.8em;
+    }
+}
+
+@media only screen and (max-width:650px) {
+
+    .contact-last {
+        float: none;
+        width: 75%;
+    }
+
+    #all-last {
+        margin-bottom: 6em;
+        margin-left: 12%;
+    }
+
+    .contact-last h2 {
+        font-size: 1.8em;
+        padding-top: 0.4em;
+    }
+}
+
+@media only screen and (max-width:600px) {
+
+    .all-cont {
+        padding-top: 0em;
+    }
+
+    .all-forms {
+        margin-left: 0%;
+    }
+
+    #all-last {
+        margin-left: 9%;
+    }
+
+}
+
+@media only screen and (max-width:330px) {
+
+
+    .contact-last h2 {
+        font-size: 1.4em;
+    }
+
+    .contact-last {
+        height: 4.5em;
+    }
+
+    #all-last {
+        margin-left: 7%;
+    }
+
+    .contact-last i {
+        font-size: 4.3em;
+    }
+
+    .all-forms h1 {
+        font-size: 1.5em;
+    }
+
+
+    .fa-mug-hot {
+        font-size: 1.5em;
+        padding-right: 0.1em;
+    }
+
+}

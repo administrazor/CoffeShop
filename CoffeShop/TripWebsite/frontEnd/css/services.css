@@ -1,0 +1,197 @@
+body {
+    background-color: #e3dede;
+}
+
+#serv-title {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: relative;
+    margin-top: 15%;
+    width: fit-content;
+    font-size: 1.5em;
+    color: #020202;
+    padding: 0.2em;
+    text-decoration: underline;
+}
+
+#all-container {
+    height: 54em;
+    text-align: center;
+    margin-top: 11%;
+    margin-left: 5em;
+    width: 100%;
+}
+
+.serv-comm {
+    background-color: #eae9e9;
+    float: left;
+    text-align: center;
+    margin: 2em;
+    width: 25%;
+    box-shadow: 0 4px 8px 0 #BEBEBE, 0 6px 20px 0 #BEBEBE;
+    padding: 1.2em;
+    height: 22em;
+}
+
+.icons-comm {
+    text-align: center;
+    padding: 0.3em 0.1em 0.2em 0.1em;
+    font-size: 80px;
+    color: #E8C582;
+}
+
+.serv-comm i{
+    font-size: 80px;
+}
+
+.serv-text {
+    padding: 1em 0.5em;
+    color: #020202;
+}
+
+h2 {
+    color: #020202;
+    font-weight: 600;
+}
+
+
+/* hover  */
+.serv-comm:hover {
+
+    background-color: #E8C582;
+
+    .serv-text {
+        color: #fff;
+    }
+
+    h2 {
+        color: #fff;
+    }
+
+    .icons-comm {
+        color: #fff;
+    }
+
+    transition: 0.3s;
+}
+
+#serv-title:hover {
+    h1 {
+        color: #E8C582;
+    }
+
+    text-decoration: none;
+}
+
+/* responsive  */
+
+@media only screen and (max-width:1200px) {
+    #all-container {
+        margin-left: 3em;
+    }
+}
+
+@media only screen and (max-width:1000px) {
+    #all-container {
+        margin-left: 2em;
+    }
+}
+
+@media only screen and (max-width:900px) {
+    #all-container {
+        margin-left: 1em;
+    }
+}
+
+@media only screen and (max-width:1020px) {
+    h2 {
+        font-size: 1.25em;
+    }
+
+    .serv-text {
+        font-size: 1em;
+    }
+
+    .icons-comm {
+        font-size: 4em;
+    }
+
+}
+
+@media only screen and (max-width:878px) {
+    h2 {
+        font-size: 1em;
+    }
+
+    .serv-text {
+        font-size: 0.9em;
+    }
+
+    .icons-comm {
+        font-size: 3em;
+    }
+
+    .serv-comm {
+        height: 22em;
+    }
+    h1{
+        padding-top: 1em;
+    }
+}
+
+
+@media only screen and (max-width:768px) {
+    #all-container {
+        margin-left: 5em;
+    }
+
+    .footer {
+        margin-top: 24em;
+    }
+
+    .serv-comm {
+        width: 30%;
+    }
+
+    .serv-title {
+        margin-top: 20%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #all-container {
+        margin-left: 3em;
+    }
+}
+
+@media only screen and (max-width:545px) {
+    .serv-comm {
+        width: 90%;
+        margin-left: 2%;
+        height: auto;
+    }
+
+    .footer {
+        margin-top: 65em;
+    }
+
+    #all-container {
+        margin-left: 1em;
+    }
+
+    .serv-text {
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (max-width:455px) {
+    #all-container {
+        height: 118em;
+    }
+
+    .footer {
+        margin-top: -4em;
+    }
+
+}

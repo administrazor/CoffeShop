@@ -1,0 +1,130 @@
+ @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+ /*fjalla font*/
+
+
+ .gal-hero {
+   height: 50%;
+   margin-top: 0;
+   width: 100%;
+   background-repeat: no-repeat;
+   position: relative;
+   background-position: center;
+   background-size: cover;
+   overflow: hidden;
+   /* to prevent any content from overflowing the section */
+   z-index: 0;
+ }
+
+ .gal-hero::before {
+   content: "";
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   position: absolute;
+   z-index: -1;
+ }
+
+ .gal-text {
+   text-align: center;
+   margin-top: 6em;
+   font-size: 2.3em;
+   color: #fffcf7;
+   font-family: 'Fjalla One', sans-serif;
+   z-index: 2;
+ }
+
+ /* carousel  */
+
+ #carouselExampleIndicators {
+   margin-top: 2em;
+   margin-bottom: 2em;
+   width: 80%;
+   max-width: 50%;
+   /*  max-width to prevent it from becoming too wide on larger screens */
+   margin-left: auto;
+   margin-right: auto;
+   z-index: 1;
+   position: relative;
+ }
+
+ .carousel-item {
+   height: 12em;
+ }
+
+ /* adjusting footer  */
+ .footer-links a {
+   text-decoration: none;
+   margin-right: 1em;
+ }
+
+ .footer-contact-links a {
+   text-decoration: none;
+ }
+
+ .footer-contact-links ul {
+   margin-right: 3em;
+ }
+
+ /* .footer-input {
+   margin-left: 0;
+   width: auto;
+ } */
+
+
+
+ /* responsive  */
+ @media only screen and (max-width:1200px) {
+
+   .footer-input {
+     width: 8em;
+   }
+
+   .input-arrow {
+     width: 4;
+   }
+ }
+
+ @media only screen and (max-width:965px) {
+   .footer-input-wrap {
+     margin-left: 40%;
+   }
+
+   .footer-input {
+     width: 13em;
+     height: 4em;
+   }
+
+   .input-arrow {
+     width: 4em;
+     height: 4em;
+   }
+
+ }
+
+ @media only screen and (max-width:800px) {
+   .footer-input-wrap {
+     margin-left: 30%;
+   }
+
+   .gal-text {
+     font-size: 1.5em;
+   }
+ }
+
+ @media only screen and (max-width:600px) {
+   .footer-input-wrap {
+     margin-left: 38%;
+   }
+
+   #top #menu {
+     margin-right: 1em;
+   }
+ }
+
+ @media only screen and (max-width:500px) {
+   .carousel-inner {
+     height: 9em;
+   }
+ }
