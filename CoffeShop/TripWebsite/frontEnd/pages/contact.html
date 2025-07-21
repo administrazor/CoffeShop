@@ -42,16 +42,24 @@
           <i class="fa-solid fa-mug-hot"></i>
         </p>
         <h1>CONTACT US</h1>
-        <form action="../index.html">
+        <!-- <form action="../index.html"> -->
+          <form action="https://formsubmit.co/ramimassalkhi@gmail.com" method="POST">
+            <!-- hidden fields for autoresponse -->
+            <input type="hidden" name="_autoresponse" value="Thank you for contacting Trip Café! We received your message and will get back to you shortly.">
+            <input type="hidden" name="_next" value="http://127.0.0.1:5500/CoffeShop/TripWebsite/frontEnd/pages/contact.html">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_subject" value="New Contact Form Submission">
+            <input type="hidden" name="_captcha" value="true">
+            <input type="text" name="_honey" style="display:none">
 
           <p class="row">
-            <input type="text" class="form-cont" placeholder="First name" required>
-            <input type="text" class="form-cont" placeholder="Last Name" required>
-            <input type="email" class="form-cont" placeholder="Email Address" required>
-            <input type="tel" class="form-cont" placeholder="Phone Number" required>
+            <input type="text" name="Name" class="form-cont" placeholder="First name" required>
+            <input type="text" name="last Name" class="form-cont" placeholder="Last Name" required>
+            <input type="email" name="email" class="form-cont" placeholder="Email Address" required>
+            <input type="tel" name="tel" class="form-cont" placeholder="Phone Number" required>
           </p>
           <p>
-            <textarea name="textarea" id="textarea" class="form-cont" placeholder="Message" cols="40"
+            <textarea name="message" id="textarea" class="form-cont" placeholder="Message" cols="40"
               rows="9"></textarea>
           </p>
           <input id="submit-butt" type="submit">

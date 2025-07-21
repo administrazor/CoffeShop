@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/menu.css">
 
+  <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
   <!-- javascript link  -->
 <script type="module"  src="../js/menu.js"></script>
 <script type="module" src="../js/navbar.js"></script>
@@ -46,7 +53,9 @@
     <div class="menu-content">
       <div class="product-name">Espresso</div>
       <div class="product-price">$2.50</div>
-      <a class="order-button" id="espresso-order">Order Now</a>
+      <div class="product-description" data-item="Espresso"></div>
+      <a class="order-button" id="espresso-order">Add to cart</a>
+
     </div>
   </div>
 
@@ -56,7 +65,8 @@
     <div class="menu-content">
       <div class="product-name">Latte</div>
       <div class="product-price">$3.00</div>
-      <a class="order-button" id="latte-order">Order Now</a>
+      <div class="product-description" data-item="Latte"></div>
+      <a class="order-button" id="latte-order">Add to cart</a>
     </div>
   </div>
 
@@ -66,7 +76,8 @@
     <div class="menu-content">
       <div class="product-name">Cappuccino</div>
       <div class="product-price">$2.50</div>
-      <a class="order-button" id="cappuccino-order">Order Now</a>
+      <div class="product-description" data-item="Cappuccino"></div>
+      <a class="order-button" id="cappuccino-order">Add to cart</a>
     </div>
   </div>
 
@@ -76,7 +87,8 @@
     <div class="menu-content">
       <div class="product-name">Americano</div>
       <div class="product-price">$3.00</div>
-      <a class="order-button" id="americano-order">Order Now</a>
+      <div class="product-description" data-item="Americano"></div>
+      <a class="order-button" id="americano-order">Add to cart</a>
     </div>
   </div>
 
@@ -86,7 +98,8 @@
     <div class="menu-content">
       <div class="product-name">Macchiato</div>
       <div class="product-price">$2.50</div>
-      <a class="order-button" id="macchiato-order">Order Now</a>
+      <div class="product-description" data-item="Macchiato"></div>
+      <a class="order-button" id="macchiato-order">Add to cart</a>
     </div>
   </div>
 
@@ -96,7 +109,8 @@
     <div class="menu-content">
       <div class="product-name">Mocha</div>
       <div class="product-price">$3.00</div>
-      <a class="order-button" id="mocha-order">Order Now</a>
+      <div class="product-description" data-item="Mocha"></div>
+      <a class="order-button" id="mocha-order">Add to cart</a>
     </div>
   </div>
 
@@ -106,7 +120,8 @@
     <div class="menu-content">
       <div class="product-name">Brownie</div>
       <div class="product-price">$2.75</div>
-      <a class="order-button" id="brownie-order">Order Now</a>
+      <div class="product-description" data-item="Brownie"></div>
+      <a class="order-button" id="brownie-order">Add to cart</a>
     </div>
   </div>
 
@@ -116,7 +131,8 @@
     <div class="menu-content">
       <div class="product-name">Cheesecake</div>
       <div class="product-price">$3.50</div>
-      <a class="order-button" id="cheesecake-order">Order Now</a>
+      <div class="product-description" data-item="Cheesecake"></div>
+      <a class="order-button" id="cheesecake-order">Add to cart</a>
     </div>
   </div>
 
@@ -126,7 +142,8 @@
     <div class="menu-content">
       <div class="product-name">Croissant</div>
       <div class="product-price">$2.00</div>
-      <a class="order-button" id="croissant-order">Order Now</a>
+      <div class="product-description" data-item="Croissant"></div>
+      <a class="order-button" id="croissant-order">Add to cart</a>
     </div>
   </div>
 
@@ -138,10 +155,116 @@
   <div class="special-offer">
     <p id="receipt"></p>
     <button id="printRButton" class="offer-button">View Order</button>
-    <button id="saveButton" class="offer-button" style="display: none;">Save to Archive</button>
+    <button id="saveButton" class="offer-button" style="display: none;">Check Out</button>
 </div>
  
-  <!-- footer section -->
+  
+
+<!-- custumise order Modal size -->
+<div id="custom-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="modal-close" class="close">&times;</span>
+    <h2 id="modal-title">Customize Order</h2>
+
+    <div id="size-section">
+    <label id=".size-label">Choose Size:</label>
+<div class="size-options">
+  <div class="size-option" data-size="Small">
+    <img src="../images/size-small.jpg" alt="Small" />
+    <span>Small</span>
+  </div>
+  <div class="size-option" data-size="Medium">
+    <img src="../images/size-medium.jpg" alt="Medium" />
+    <span>Medium</span>
+  </div>
+  <div class="size-option" data-size="Large">
+    <img src="../images/size-large.jpg" alt="Large" />
+    <span>Large</span>
+  </div>
+</div>
+<input type="hidden" id="order-size" />
+</div>
+
+<!-- custumise order Modal quantity -->
+    <label>Quantity:</label>
+    <input type="number" id="order-quantity" value="1" min="1" />
+
+<!-- custumise order Modal Adds on -->
+ <div id="addons-section">
+    <label id="addons-label">Add-ons:</label>
+    <div id="addons-list">
+      <label><input type="checkbox" value="Extra shot"> Extra shot</label><br />
+      <label><input type="checkbox" value="Whipped cream"> Whipped cream</label><br />
+      <label><input type="checkbox" value="Almond milk"> Almond milk</label><br />
+    </div>
+  </div>
+
+<!-- custumise order Modal filling for croissant -->
+    <div id="filling-section" style="display: none;">
+      <label id="filling-label">Choose Filling:</label>
+      <select id="filling-select">
+        <option value="Chocolate">Chocolate</option>
+        <option value="Cheese">Cheese</option>
+        <option value="Vanilla">Vanilla</option>
+      </select>
+    </div>
+
+    <button id="confirm-add-btn">Add to Cart</button>
+  </div>
+</div>
+
+
+<!-- choose the pickup or delivery time -->
+<div class="modal" id="orderOptionsModal" style="display: none;">
+  <div class="modal-content">
+    <h2>Choose Order Method</h2>
+
+    <div class="delivery-toggle-wrapper">
+        <div class="delivery-toggle">
+        <input type="radio" id="delivery" name="orderType" value="delivery">
+        <input type="radio" id="pickup" name="orderType" value="pickup">
+
+        <!-- <div class="toggle-bg"></div> -->
+        <div class="slider"></div>
+
+        <label for="delivery">Delivery</label>
+        <label for="pickup">Pickup</label>
+      </div>
+    </div>
+
+    <div id="deliveryFields" style="display: none;">
+      <label for="facultySelect">Choose Faculty:</label>
+      <select id="facultySelect" onchange="loadFacultyMap()">
+        <option value="">-- Select Faculty --</option>
+        <option value="science">Faculty of Science</option>
+        <option value="fine_arts">Faculty of Fine Arts</option>
+        <option value="business">Faculty of Business</option>
+      </select>
+      <label for="deliveryAddress" >Address:</label>
+      <div id="facultyMapContainer" src="" alt="Faculty Map" style="margin-top: 0px; position: relative;"></div>
+
+      
+      <input type="text" id="deliveryAddress" placeholder="choose delivery address on the map" readonly/>
+
+      <label for="deliveryTime">Delivery Time:</label>
+      <input type="text" id="deliveryTime"/>
+    </div>
+
+    <div id="pickupFields" style="display: none;">
+      <label for="pickupTime">Pickup Time:</label>
+      <input type="text" id="pickupTime" />
+    </div>
+
+    <div class="modal-buttons">
+      <button class="confirm" id="confirmOrderBtn">Confirm</button>
+      <button class="cancel" id="closeOrderBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+ 
+ <!-- footer section -->
   <footer class="footer">
     <div class="all">
  
@@ -206,8 +329,6 @@
       </div>
     </div>
   </footer>
- 
- 
 </body>
 
 </html>

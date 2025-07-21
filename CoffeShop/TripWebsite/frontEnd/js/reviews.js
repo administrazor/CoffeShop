@@ -7,6 +7,7 @@ import {
 
 const reviewForm = document.getElementById("review-form");
 
+
 // Helper function to display a review on the page
 function displayReview({ firstname, review, rating, clientId }) {
   // Create a new list item for the testimonial
@@ -30,6 +31,26 @@ function displayReview({ firstname, review, rating, clientId }) {
   document.getElementById("testimonial-ul").appendChild(li);
 }
 
+// Function to load and display all reviews
+async function loadReviews() {
+  try {
+    const reviews = await API.getAllReviews();
+    const reviewsList = document.getElementById("testimonial-ul");
+    reviewsList.innerHTML = ""; // Clear existing reviews before adding new ones
+
+    reviews.forEach(review => {
+      // Assuming review object has firstname, review, rating, clientId
+      displayReview(review);
+    });
+  } catch (error) {
+    console.error("Failed to load reviews:", error);
+  }
+}
+
+// Call loadReviews when the page loads
+window.addEventListener("DOMContentLoaded", loadReviews);
+
+
 // Helper function to generate star ratings
 function getStars(rating) {
   let stars = "";
@@ -42,6 +63,25 @@ function getStars(rating) {
   return stars;
 }
 
+
+const stars = document.querySelectorAll(".star-rating .star");
+const hiddenInput = document.getElementById("input3");
+
+// Star click behavior
+stars.forEach((star) => {
+  star.addEventListener("click", () => {
+    const rating = parseInt(star.getAttribute("data-value"));
+    hiddenInput.value = rating;
+
+    stars.forEach((s) => {
+      s.classList.remove("selected");
+      if (parseInt(s.getAttribute("data-value")) <= rating) {
+        s.classList.add("selected");
+      }
+    });
+  });
+});
+
 // Add event listener to the form
 reviewForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -52,6 +92,7 @@ reviewForm.addEventListener("submit", async (event) => {
     rating: parseInt(document.getElementById("input3").value.trim()),
     clientId: getCurrentUserId(),
   };
+  
 
   try {
     if (isUserLoggedIn()) {
@@ -59,6 +100,9 @@ reviewForm.addEventListener("submit", async (event) => {
       console.log("Review added successfully!");
       displayReview(reviewData);
       reviewForm.reset();
+      // Reset stars
+      stars.forEach((s) => s.classList.remove("selected"));
+      hiddenInput.value = "5"; // default back
     }
   } catch (error) {
     console.error("Error during adding review:", error.message);

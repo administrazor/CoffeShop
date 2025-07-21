@@ -94,6 +94,20 @@ const API = {
     alert("Added review successfully!");
   },
 
+  getAllReviews: async function () {
+  try {
+    const response = await fetch(`${API_URL}/reviews`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch reviews");
+    }
+    return await response.json();
+  } catch (err) {
+    console.error("Error fetching reviews:", err);
+    throw err;
+  }
+},
+
+
   saveOrder: async function (orderData) {
     const response = await fetch(`${API_URL}/saveorder`, {
       method: "POST",

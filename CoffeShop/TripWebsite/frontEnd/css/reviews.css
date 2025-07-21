@@ -116,6 +116,8 @@ body {
     color: white;
     border: none;
     padding: 0.7em;
+    display: block;
+    margin: 1rem auto;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -128,6 +130,33 @@ body {
 .sub-commun{
     display: flex;
 }
+.star-rating {
+  direction: ltr;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse; /* This visually flips the order */
+  font-size: 3rem;
+  color: #ccc;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: gold;
+}
+
+.star.selected {
+  color: gold;
+}
+.stars i {
+  margin-right: 10px; /* or any value you prefer */
+}
+
+
 
 
 
