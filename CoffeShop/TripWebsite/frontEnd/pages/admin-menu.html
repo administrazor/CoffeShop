@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="  Explore a diverse selection of coffee blends.">
+  <!-- Website Title -->
+  <title>Menu</title>
+
+  <!-- Website Icon -->
+  <link rel="shortcut icon" type="image/ico" href="../images/Trip Logo.svg" />
+
+  <!-- CSS stylesheet link -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/admin-menu.css">
+
+  <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+  <!-- javascript link  -->
+<script type="module"  src="../js/admin-menu.js"></script>
+<script type="module" src="../js/admin-navbar.js"></script>
+<script type="module" src="../js/logout.js" ></script>
+
+  <!-- font-awesome link -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+ <!-- navbar section -->
+ <div id="admin-navbar"></div>
+ 
+  <div class="menu-img" style="background-image: url(../images/cup-beans.jpg)">
+    <div class="menu-hero-text">
+      <h1>
+        Menu
+      </h1>
+    </div>
+   </div>
+ 
+ <!-- HTML container to inject products -->
+   <div id="menu-all"></div>
+
+   
+  <!-- Add New Item function -->
+<div class="menu-comm new-item-form">
+  <img id="new-item-image" alt="Product Image" />
+
+  <input type="file" id="image-upload" accept="image/*" />
+
+  <div class="modal-content add-product">
+    <form id="add-form">
+      <label for="add-name" class="add-label">Product Name:</label>
+      <input type="text" id="add-name" placeholder="Name" required />
+
+      <label for="add-price" class="add-label">Product Price:</label>
+      <div class="price-input-wrapper">
+        <span class="dollar-sign">$</span> 
+        <input type="number" id="add-price" step="0.1" placeholder="Price" required />
+      </div>
+
+      <label for="add-description" class="add-label">Product Description:</label>
+      <textarea id="add-description" placeholder="Description" maxlength="77"></textarea>
+
+      <label for="add-category" class="add-label">Product Category:</label>
+      <select id="add-category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="drinks">Drinks</option>
+        <option value="desserts">Desserts</option>
+        <option value="croissant">Croissant</option>
+        <option value="sandwich">Sandwich</option>
+        <option value="cold-brew">Cold Brew</option>
+      </select>
+
+      <label for="add-time-to-preper" class="add-label">Preparation Time:</label>
+      <div class="time-input-wrapper">
+        <input type="number" id="add-time-to-preper" step="0.1" placeholder="Preparation Time" />
+        <span class="unit-label">minutes</span>
+      </div>
+
+      <div class="menu-buttons">
+        <button type="submit" class="order-button add-button">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Edit Product Modal -->
+<div id="edit-modal" class="modal hidden">
+  <div class="modal-content edit-product">
+    <span id="close-modal" class="close">&times;</span>
+    <h2>Edit Product</h2>
+    <form id="edit-form">
+        <div class="image-preview-wrapper">
+  <div class="path-section">
+    <label class="edit-label" for="edit-image-path">Image path:</label>
+    <input type="text" id="edit-image-path" placeholder="Image path" />
+  </div>
+  <div class="preview-section">
+    <img id="image-preview" src="" alt="Image" />
+  </div>
+</div>
+      <label for="edit-name" class="edit-label">Product Name:</label>
+      <input type="text" id="edit-name" placeholder="Name" required />
+
+      <label for="edit-price" class="edit-label">Product Price:</label>
+      <div class="price-input-wrapper">
+        <span class="dollar-sign">$</span> 
+        <input type="number" id="edit-price" step="0.1" placeholder="Price" required />
+      </div>
+
+      <label for="edit-description" class="edit-label">Product Description:</label>
+      <textarea id="edit-description" placeholder="Description" maxlength="77"></textarea> 
+
+      <label for="edit-category" class="edit-label">Product Category:</label>
+      <select id="edit-category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="drinks">Drinks</option>
+        <option value="desserts">Desserts</option>
+        <option value="croissant">Croissant</option>
+        <option value="sandwich">Sandwich</option>
+        <option value="Cold Brew">Cold Brew</option>
+      </select>
+      <label for="edit-time-to-preper" class="edit-label">Preperation Time:</label>
+      <div class="time-input-wrapper">
+       <input type="number" id="edit-time-to-preper" step="0.1" placeholder="Preparation Time" />
+       <span class="unit-label">minutes</span>
+      </div>
+
+
+      <!-- Submit Button -->
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+
+
+ 
+ 
+  
+
+
+
+ 
+ <!-- footer section -->
+  <footer class="footer">
+    <div class="all">
+ 
+      <div class="comm footer-about">
+        <h3 class="title">About Us</h3>
+        <p class="text">
+          Trip: Your cozy coffee spot in Hadath, Lebanon.
+          Enjoy quality brews and friendly vibes. Come for the coffee, stay for the warmth of community.
+          Join us in the heart of this charming village for a delightful experience.
+        </p>
+      </div>
+ 
+      <div class="comm footer-links">
+        <h3 class="title">Quick Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="reviews.html">Review</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+ 
+      <div class="comm footer-contact-links">
+        <h3 class="title">Contact Info</h3>
+        <ul>
+          <li>
+            <a href="mailto:trip@gmail.com">trip@gmail.com</a>
+          </li>
+          <li>
+            <a href="tel:+96178814537">+961-00-000-000</a>
+          </li>
+          <li>
+            <div class="follow-wrap">
+              <div class="social-media-footer">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </li>
+      </div>
+ 
+      <div class="comm footer-newsletter">
+        <h3 class="title">Join Our Newsletter</h3>
+        <p class="text">Become a member of our community.</p>
+        <div class="footer-input-wrap"><br>
+          <li>
+            <a href="./login.html" class="input-arrow">Subscribe</a>
+        </li>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="bottom-footer">
+      <div class="copyright">
+        <p class="text">
+          © Copyright 2025 Trip. All Rights Reserved. Developed by Ziad and Rami
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -6,11 +6,17 @@ const logoutRoutes = require("./routes/logoutRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const accRoutes = require("./routes/accountDetailsRoutes");
+const prodRoutes = require("./routes/productsRoutes");
 
 const cors = require("cors");
 const port = 5000;
 const app = express();
 const session = require("express-session");
+
+const { Server } = require("socket.io");
+const http = require("http");
+const server = http.createServer(app); 
+
 
 // Configure express-session middleware
 app.use(
@@ -38,7 +44,37 @@ app.use("/logout", logoutRoutes);
 app.use("/reviews", reviewRoutes);
 app.use("/saveorder", orderRoutes);
 app.use("/profileDetails", accRoutes);
+app.use("/products", prodRoutes);
+
+
+
+
+
+// Create Socket.IO server attached to HTTP server
+const io = new Server(server, {
+  cors: {
+    origin: "*",  // Adjust for security; allow your frontend URL
+    methods: ["GET", "POST", "PUT"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("A user connected: " + socket.id);
+
+  // You can listen for client events here if needed
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected: " + socket.id);
+  });
+});
+
+
+app.set("io", io);
+
 // Start server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
+
+
+module.exports = { io };

@@ -6,49 +6,47 @@ let orderItems = [];
 let totalAmount = 0;
 let selectedItemName = "";
 let selectedItemPrice = 0;
+let selectedItemCategory = "";
 let basePrice = 0;
 let preperation_time = 0;
 let timeToPreper = 0;
 let hour = "";
 let minute ="";
-const DESSERT_ITEMS = ['Brownie', 'Cheesecake'];
+let discount = 0;
+let flatpickrInstance = null;
 
-// product info
-const productInfo = {
-  Espresso: {
-    description: "A concentrated coffee brewed by forcing hot water through ground coffee beans.",
-  },
-  Latte: {
-    description: "Espresso with steamed milk and a small layer of foam. Creamy and smooth.",
-  },
-  Cappuccino: {
-    description: "Equal parts espresso, steamed milk, and milk foam. Bold and airy.",
-  },
-  Americano: {
-    description: "Espresso diluted with hot water. Less intense than straight espresso.",
-  },
-  Macchiato: {
-    description: "Espresso topped with a small amount of milk foam. Strong and short.",
-  },
-  Mocha: {
-    description: "Espresso, steamed milk, and chocolate syrup. Often topped with whipped cream.",
-  },
-  Brownie: {
-    description: "Rich chocolate dessert with a fudgy texture, baked fresh daily.",
-  },
-  Cheesecake: {
-    description: "Creamy cake made from cream cheese on a biscuit base. Served chilled.",
-  },
-  Croissant: {
-    description: "Buttery, flaky French pastry. Served warm or with jam.",
-  },
-};
-// inject to html the description
-document.querySelectorAll('.product-description').forEach(descDiv => {
-  const itemName = descDiv.getAttribute('data-item');
-  const description = productInfo[itemName]?.description || 'No description available.';
-  descDiv.textContent = description;
-});
+
+
+
+async function loadMenu() {
+  try {
+    const products = await API.getAllProducts();
+    window.currentProducts = products;  // save for later
+    const container = document.getElementById("menu-all");
+    container.innerHTML = "";
+
+    products.forEach(product => {
+      const div = document.createElement("div");
+      div.classList.add("menu-comm");
+      div.innerHTML = `
+        <img src="${product.image_path}" alt="${product.name}">
+        <div class="menu-content">
+          <div class="product-name">${product.name}</div>
+          <div class="product-price">$${product.price.toFixed(2)}</div>
+          <div class="product-description">${product.description}</div>
+          <div class="menu-buttons">
+            <a class="order-button" id="espresso-order" onclick="openCustomization('${product.name}', ${product.price}, ${product.timeToPreper}, '${product.category}')">Add to cart</a>
+          </div>
+        </div>`;
+      container.appendChild(div);
+    });
+  } catch (err) {
+    console.error("Failed to load menu:", err);
+  }
+}
+
+window.onload = loadMenu;
+
 
 //selection size model
 let selectedSize =""
@@ -79,19 +77,16 @@ document.querySelectorAll(".size-option").forEach(option => {
 
 
 
-// Function to add an item to the order
-export function addToOrder(itemName, price) {
-    orderItems.push(itemName);
-    totalAmount += price;
-    console.log(`${itemName} added to the order.`);
-}
+
 
 // Function to add an item to the order with customization
-function openCustomization(itemName, price, preperation) {
+window.openCustomization = async function(itemName, price, preperation, category) {
   selectedItemName = itemName;
   basePrice = price; // Save base price (small)
   selectedItemPrice = price; // Default
   preperation_time = preperation;
+  selectedItemCategory = category;
+
 
   // Reset selection
   document.getElementById("order-size").value = "";
@@ -107,18 +102,18 @@ if (mediumOption) {
 
   document.getElementById("modal-title").innerText = `Customize ${itemName}`;
   document.getElementById("custom-modal").style.display = "flex";
-  const isDessert = DESSERT_ITEMS.includes(itemName);
+  
 
   // Toggle visibility based on item type
-if (itemName === 'Croissant') {
+if (category === 'croissant') {
   document.getElementById("filling-section").style.display = "block";
   document.getElementById("addons-section").style.display = "none";
   document.getElementById("size-section").style.display = "none";
-} else if (isDessert) {
+} else if (category === 'desserts') {
   document.getElementById("filling-section").style.display = "none";
   document.getElementById("addons-section").style.display = "none";
   document.getElementById("size-section").style.display = "none";
-} else {
+} else if (category === 'drinks'){
   document.getElementById("filling-section").style.display = "none";
   document.getElementById("addons-section").style.display = "block";
   document.getElementById("size-section").style.display = "block";
@@ -151,7 +146,7 @@ document.getElementById("confirm-add-btn").addEventListener("click", () => {
   } else {
     itemDescription = `${quantity} x ${size} ${selectedItemName}`;
     if (addons.length) {
-      itemDescription += ` with ${addons.join(", ")}`;
+      itemDescription += ` with ${addons.join(" with ")}`;
     }
   }
     const preperationtotal = quantity * preperation_time; 
@@ -165,43 +160,6 @@ document.getElementById("confirm-add-btn").addEventListener("click", () => {
     closeCustomization();
 });
 
-
-// add event listener to the buttons
-document.getElementById('espresso-order').addEventListener('click', function() {
-    openCustomization('Espresso', 2.5, 2);
-});
-
-document.getElementById('latte-order').addEventListener('click', function() {
-    openCustomization('Latte', 3, 3);
-});
-
-document.getElementById('cappuccino-order').addEventListener('click', function() {
-    openCustomization('Cappuccino', 2.5, 3);
-});
-
-document.getElementById('americano-order').addEventListener('click', function() {
-    openCustomization('Americano', 3, 3);
-});
-
-document.getElementById('macchiato-order').addEventListener('click', function() {
-    openCustomization('Macchiato', 2.5, 4);
-});
-
-document.getElementById('mocha-order').addEventListener('click', function() {
-    openCustomization('Mocha', 3, 4);
-});
-
-document.getElementById('brownie-order').addEventListener('click', function() {
-    openCustomization('Brownie', 2.75, 2);
-});
-
-document.getElementById('cheesecake-order').addEventListener('click', function() {
-    openCustomization('Cheesecake', 3.5, 2);
-});
-
-document.getElementById('croissant-order').addEventListener('click', function() {
-    openCustomization('Croissant', 2, 2);
-});
 
 
 document.getElementById('printRButton').addEventListener('click', function() {
@@ -228,7 +186,7 @@ export function printR() {
     if (orderItems.length > 0) {
         // Apply Discount Logic
         const hours = now.getHours();
-        let discount = 0;
+        
         if (hours >= 7 && hours < 12) {
             discount = 0.30; // 30% discount from 7 AM to 12 PM
         } else if (hours >= 14 && hours < 17) {
@@ -246,7 +204,7 @@ export function printR() {
             <strong>Original Total: $${totalAmount.toFixed(2)}</strong><br>
             <strong>Discount Applied: ${discount * 100}%</strong><br>
             <strong>Discounted Total: $${discountedAmount.toFixed(2)}</strong><br>
-            <strong>Preperation Time: ${timeToPreper.toFixed(2)}</strong><br>
+            <strong>Preperation Time: ${timeToPreper.toFixed(2)} minutes</strong><br>
             <br>You have been served by Waiter Ali.<br>
             Thank you for your order!<br>
             <button type="button" id="saveButton" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
@@ -254,94 +212,13 @@ export function printR() {
             </button>
         `;
         receiptDiv.innerHTML = receiptContent; // Update the receipt content
+        document.getElementById('saveButton').addEventListener('click', submitOrder);
 
-//         // Button Click Listener for "Save to Archive"
-//         document.getElementById('saveButton').addEventListener('click', async (event) => {
-          
-           
-//             try {
-//                 if(isUserLoggedIn()){
-//                   document.getElementById('orderOptionsModal').style.display = 'block';
-//                   // Toggle between delivery and pickup
-//                   document.querySelectorAll('input[name="orderType"]').forEach(radio => {
-//                     radio.addEventListener('change', () => {
-//                       const isDelivery = document.querySelector('input[name="orderType"]:checked').value === 'delivery';
-//                       document.getElementById('deliveryFields').style.display = isDelivery ? 'block' : 'none';
-//                       document.getElementById('pickupFields').style.display = isDelivery ? 'none' : 'block';
-//                     });
-//                   });
+      } else {
+        receiptDiv.innerHTML = "No orders yet."; 
 
-//                   document.getElementById('confirmOrderBtn').addEventListener('click', async () => {
-
-//                   // formating the date to save in db
-//                   function formatDateToMySQL(datetime) {
-//                     const pad = n => n.toString().padStart(2, '0');
-//                     return `${datetime.getFullYear()}-${pad(datetime.getMonth() + 1)}-${pad(datetime.getDate())} ` +
-//                     `${pad(datetime.getHours())}:${pad(datetime.getMinutes())}:${pad(datetime.getSeconds())}`;
-//                   }
-//                   // Get current date and time at click time
-//                   const now = new Date();
-//                   const dateTime = formatDateToMySQL(now);
-//                   const orderType = document.querySelector('input[name="orderType"]:checked').value;
-
-//                   let deliveryAddress = "";
-//                   let scheduledTime = "";
-
-//                    if (orderType === 'delivery') {
-//                       deliveryAddress = document.getElementById('deliveryAddress').value;
-//                       scheduledTime = document.getElementById('deliverytime').value;
-//                       if (!deliveryAddress || !scheduledTime) {
-//                         alert("Please enter both delivery address and delivery time.");
-//                         return;
-//                       }
-//                     } else {
-//                       scheduledTime = document.getElementById('pickupTime').value;
-//                       if (!scheduledTime) {
-//                         alert("Please enter pickup time.");
-//                         return;
-//                       }
-//                     }
-
-
-//                 // Prepare the data to be sent to the API
-//                 const orderData = {
-//                     clientId: getCurrentUserId(),
-//                     orderItems: orderItems.join(", "), // join items as a comma-separated string
-//                     TotalAmount: totalAmount,
-//                     discout: discount * 100, 
-//                     discoutAmount: totalAmount * discount, 
-//                     datetime: dateTime,
-//                     employee: 'NONE ARE HIRED YET', 
-//                 };
-        
-//                 // Assuming API.saveOrder is imported from api.js
-//                 const response = await API.saveOrder(orderData);
-//                 if (response) {
-//                     alert('Your order has been saved successfully!');
-//                     orderItems = [];
-//                     totalAmount = 0;
-//                     receiptDiv.innerHTML = ''; 
-//                     document.getElementById('orderOptionsModal').style.display = 'none';
-//                 } else {
-//                     alert('Failed to save the order. Try again later.');
-//                 }
-//               });
-//             }
-//             else{
-//                 alert('Please Login if you want to save your order');
-//             }
-//             } catch (error) {
-//                 console.error('Error saving order:', error);
-//                 alert('Error saving order. Please try again.');
-//             }
-//         });
-    
-//     } else {
-//         receiptDiv.innerHTML = "No orders yet."; 
-
-
-
-
+    }
+}
 
 // Util: Format JS Date to MySQL DATETIME string
 function formatDateToMySQL(datetime) {
@@ -365,7 +242,11 @@ function setupOrderTypeToggle() {
         setMinimumTime('pickupTime', timeToPreper);
         selector = '#pickupTime'
       }
-      flatpickr(selector, {
+
+      if (flatpickrInstance) {
+  flatpickrInstance.destroy(); // remove previous instance
+}
+      flatpickrInstance = flatpickr(selector, {
     enableTime: true,
     noCalendar: true,
     dateFormat: "H:i",      // 24-hour format
@@ -375,8 +256,10 @@ function setupOrderTypeToggle() {
         const date = selectedDates[0];
         const hours = date.getHours();
         const minutes = date.getMinutes();
+        const Time = `${hours}:${minutes}`;
+        const futureTime = `${hour}:${minute}`;
 
-        if (hours <= hour  && minutes <= minute) {
+        if(Time< futureTime){
           // alert("This time is not available. Please choose another time.");
           instance.setDate(`${hour}:${minute}`,false);  // Clear invalid selection
         }
@@ -404,12 +287,17 @@ function setMinimumTime(inputId, orderTimeMinutes) {
 }
 
 
+
 // Confirm Order inside Modal
 async function confirmOrder() {
+  console.log("Submitting orderItems:", orderItems);
+
+  document.getElementById('confirmOrderBtn').disabled = true;
   try {
     const selectedOrderType = document.querySelector('input[name="orderType"]:checked');
      if (!selectedOrderType) {
       alert("Please choose an order method.");
+        document.getElementById('confirmOrderBtn').disabled = false;
       return;
     }
 
@@ -423,17 +311,23 @@ async function confirmOrder() {
 
     // Validate input fields
     if (orderType === 'delivery') {
-      deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+      const facultySelect = document.getElementById('facultySelect');
+  const facultyText = facultySelect.options[facultySelect.selectedIndex].text;
+  const manualAddress = document.getElementById('deliveryAddress').value.trim(); 
+
+  deliveryAddress = `${facultyText} - ${manualAddress}`;
       scheduledTime = document.getElementById('deliveryTime').value;
       
       if (!deliveryAddress || !scheduledTime) {
         alert("Please enter both delivery address and delivery time.");
+          document.getElementById('confirmOrderBtn').disabled = false;
         return;
       }
     } else {
       scheduledTime = document.getElementById('pickupTime').value;
       if (!scheduledTime) {
         alert("Please enter pickup time.");
+          document.getElementById('confirmOrderBtn').disabled = false;
         return;
       }
     }
@@ -449,26 +343,43 @@ async function confirmOrder() {
       discoutAmount: totalAmount * discount,
       datetime: dateTime,
       employee: 'NONE ARE HIRED YET',
-      // deliveryMethod: orderType,
-      // deliveryAddress: deliveryAddress || "N/A",
-      // scheduledTime
+      orderMethod: orderType,
+      deliveryAddress: deliveryAddress || "null",
+      scheduledTime: scheduledTime
     };
 
     const response = await API.saveOrder(orderData);
     if (response) {
       alert('Your order has been saved successfully!');
-      orderItems = [];
-      totalAmount = 0;
+      const receiptDiv = document.getElementById('receipt');
       receiptDiv.innerHTML = '';
+      resetOrderState();
       document.getElementById('orderOptionsModal').style.display = 'none';
+      closeOrderModal();
     } else {
       alert('Failed to save the order. Try again later.');
+        document.getElementById('confirmOrderBtn').disabled = false;
     }
 
   } catch (error) {
     console.error('Error saving order:', error);
     alert('An error occurred while saving the order.');
+      document.getElementById('confirmOrderBtn').disabled = false;
   }
+    document.getElementById('confirmOrderBtn').disabled = false;
+
+}
+
+function resetOrderState() {
+  orderItems = [];
+  totalAmount = 0;
+  timeToPreper = 0;
+  selectedItemName = "";
+  selectedItemPrice = 0;
+  selectedItemCategory = "";
+  basePrice = 0;
+  preperation_time = 0;
+  selectedSize = "";
 }
 
 function closeOrderModal() {
@@ -476,7 +387,7 @@ function closeOrderModal() {
   modal.style.display = 'none';
 
   // Clear all form fields
-  // document.getElementById('deliveryAddress').value = '';
+  document.getElementById('deliveryAddress').value = '';
   // document.getElementById('deliverytime').value = '';
   // document.getElementById('pickupTime').value = '';
 
@@ -490,7 +401,7 @@ function closeOrderModal() {
 }
 
 // Main Checkout Button Handler
-document.getElementById('saveButton').addEventListener('click', (event) => {
+function submitOrder(){
   if (!isUserLoggedIn()) {
     alert('Please login if you want to save your order.');
     return;
@@ -500,21 +411,17 @@ document.getElementById('saveButton').addEventListener('click', (event) => {
     receiptDiv.innerHTML = "No orders yet.";
     return;
   }
-
+  
   // Open the Modal Form
   document.getElementById('orderOptionsModal').style.display = 'flex';
   setupOrderTypeToggle();
-});
+}
 
 // Confirm Order Button Inside Modal
 document.getElementById('confirmOrderBtn').addEventListener('click', confirmOrder);
 document.getElementById('closeOrderBtn').addEventListener('click', closeOrderModal);
 
-} else {
-        receiptDiv.innerHTML = "No orders yet."; 
 
-    }
-}
 
 
 // faculti image with button on it

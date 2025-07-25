@@ -22,7 +22,8 @@ loginForm.addEventListener("submit", async (event) => {
       localStorage.setItem("user", JSON.stringify(response.user));
       console.log("Logged-in user:", response.user);
       alert("Successfully Logged in!");
-      window.location.href = "./index.html";
+      if(response.user.email.toLowerCase() === 'admin1234@gmail.com') {window.location.href = "./admin.html";}
+       else{ window.location.href = "./index.html";}
       loginForm.reset();
     }
   } catch (error) {

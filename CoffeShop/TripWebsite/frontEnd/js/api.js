@@ -202,6 +202,109 @@ const API = {
       throw error;
     }
   },
+
+  getOrders: async function () {
+    try {
+      const response = await fetch(`${API_URL}/saveorder`);
+      if (!response.ok) throw new Error(`Failed to fetch orders (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching orders:", error.message);
+      throw error;
+    }
+  },
+
+    getOrderStatistic: async function () {
+    try {
+      const response = await fetch(`${API_URL}/saveorder/statistic`);
+      if (!response.ok) throw new Error(`Failed to fetch orders (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching orders:", error.message);
+      throw error;
+    }
+  },
+
+  updateOrders: async function (id, updatedData) {
+    try {
+      const response = await fetch(`${API_URL}/saveorder/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) throw new Error(`Failed to update order (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error updating order:", error.message);
+      throw error;
+    }
+  },
+
+  getAllProducts: async function () {
+    try {
+      const response = await fetch(`${API_URL}/products`);
+      if (!response.ok) throw new Error(`Failed to fetch products (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching products:", error.message);
+      throw error;
+    }
+  },
+
+  
+  addProduct: async function (productData) {
+    try {
+      const response = await fetch(`${API_URL}/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (!response.ok) throw new Error(`Failed to add product (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error adding product:", error.message);
+      throw error;
+    }
+  },
+
+  updateProduct: async function (id, updatedData) {
+    try {
+      const response = await fetch(`${API_URL}/products/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) throw new Error(`Failed to update product (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error updating product:", error.message);
+      throw error;
+    }
+  },
+
+  deleteProduct: async function (id) {
+    try {
+      const response = await fetch(`${API_URL}/products/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error(`Failed to delete product (${response.status})`);
+      return await response.json();
+    } catch (error) {
+      console.error("Error deleting product:", error.message);
+      throw error;
+    }
+  },
+
 };
 
 export default API;

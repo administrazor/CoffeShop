@@ -1,4 +1,3 @@
-
  
 function printoffre() {
   const out = document.getElementById("offreoutput");
