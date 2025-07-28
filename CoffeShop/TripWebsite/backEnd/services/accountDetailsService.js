@@ -1,3 +1,5 @@
+// layer that communicates with the db
+
 const db = require("../config/database");
 const queries = require("../repositories/accountDetailsQueries");
 

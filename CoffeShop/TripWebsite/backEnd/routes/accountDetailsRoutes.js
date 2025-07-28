@@ -19,3 +19,17 @@ router.get("/orders/:id", (req, res) => {
 });
 
 module.exports = router;
+
+//Purpose:
+//--------
+//Defines API endpoints.
+//Connects URLs to the appropriate controller functions.
+//Example: GET /api/account/123 → goes to getClientDetails().
+
+
+// req means parameter of url
+
+// from:   review.js ->  API(frontend) -> Routes -> Controllers -> Service -> Query -> DB
+
+//Controller: full req body
+//Service: Extracting params

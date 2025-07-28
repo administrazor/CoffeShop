@@ -38,6 +38,9 @@ signupForm.addEventListener("submit", async (event) => {
     if (result && result.user) {
       alert("Successfully signed up!"); // Show success alert
       localStorage.setItem("user", JSON.stringify(result.user));
+
+// WE NEED TO STRINGIFY IN ORDER TO SAVE IN LOCALSTROAGE AND JSON.PARSE() PARSE FROM STRING TO JSON AGAIN
+
       window.location.href = "./index.html";
       console.log("Logged-in user:", result.user);
       signupForm.reset(); // Reset the form fields

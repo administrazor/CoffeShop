@@ -17,3 +17,5 @@ db.getConnection((error, connection) => {
 });
 
  module.exports = db;
+
+/// routes -> controller -> services -> queries

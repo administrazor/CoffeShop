@@ -1,5 +1,11 @@
 const accService = require("../services/accountDetailsService");
 
+
+// CONTROLLERS REFORWARD THE RESPONSE ENCAPSULATING IN ITS BODY THE OBJECT HOLDING PARAMS
+// res.status(200).json({
+ //     data: userInfo,
+ //   });
+
 async function getClientDetails(req, res) {
   try {
     const { id } = req.params; // Extract ID from request body

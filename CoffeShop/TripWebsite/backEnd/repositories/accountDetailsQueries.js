@@ -20,3 +20,6 @@ module.exports = {
   DELETE_REVIEWS_BY_CLIENT_ID,
   GET_ORDER_HISTORY_BY_USER_ID,
 };
+
+//means you're exporting an object that contains named properties, 
+// each referring to a constant (in this case, SQL query strings) so that they can be used in other files.

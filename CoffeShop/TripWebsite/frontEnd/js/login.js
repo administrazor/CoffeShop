@@ -4,6 +4,7 @@ const loginForm = document.getElementById("login");
 let errorMessage = "";
 
 loginForm.addEventListener("submit", async (event) => {
+  //stops the form from reloading the page.
   event.preventDefault();
   try {
     const loginData = {
@@ -20,6 +21,7 @@ loginForm.addEventListener("submit", async (event) => {
     if (response && response.user) {
       console.log("User logged in successfully!", response);
       localStorage.setItem("user", JSON.stringify(response.user));
+      // saving in local storage
       console.log("Logged-in user:", response.user);
       alert("Successfully Logged in!");
       window.location.href = "./index.html";
